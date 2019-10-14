@@ -504,6 +504,8 @@ const checkNodeVersion = (path) => {
     try {
       const filePath = `${path}/package.json`;
       const oldPkgJson = getFileContent(filePath);
+      console.log('THE OBJECT')
+      console.log(oldPkgJson)
       console.log("JSON VERSION")
       console.log(oldPkgJson.version)
       const newPgkJson = __webpack_require__(169)(filePath);
