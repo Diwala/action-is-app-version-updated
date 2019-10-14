@@ -503,8 +503,7 @@ const { getFileContent } = __webpack_require__(824);
 const checkNodeVersion = (path) => {
     try {
       const filePath = `${path}/package.json`;
-      const file = getFileContent(filePath);
-      const oldPkgJson = JSON.parse(file)
+      const oldPkgJson = getFileContent(filePath);
       console.log("JSON VERSION")
       console.log(oldPkgJson.version)
       const newPgkJson = __webpack_require__(169)(filePath);
@@ -8468,7 +8467,7 @@ const getFileContent = async (path) => {
     console.log(parsed.version);
     console.log(typeof parsed);
     console.log(typeof fileContent);
-    return fileContent;
+    return parsed;
   } catch (e) {
     throw e;
   }
