@@ -9,6 +9,14 @@ inputs:
     description: 'Where to find the control file of the project, f.ex package.json on node'
     required: true
     default: 'echo "No file path value found"'
+  owner: 
+    description: 'Owner of repo'
+    required: true
+    default: 'echo "No owner value found"'
+  repo: 
+    description: 'The specific repo to target'
+    required: true
+    default: 'echo "No repo value found"'
 runs:
   using: 'node12'
   main: 'dist/index.js'
