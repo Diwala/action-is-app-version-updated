@@ -8462,18 +8462,17 @@ const getFileContent = async (path) => {
       path
     })
     const buff = Buffer.from(res.content, 'base64');
-    const fileContent = buff.toJSON();
+    const fileContent = buff.toString('utf8');
     console.log("TYPE OFF")
     console.log(typeof fileContent)
     console.log("The content")
     console.log(fileContent);
     console.log("The VERSION")
     console.log(fileContent.version);
-    Object.keys(fileContent).forEach(function(key,index) {
-      console.log('LOOOOOOPP')
-      console.log(key);
-      console.log(fileContent[key]);
-  });
+    console.log("PPPAAAAAARSES")
+    console.log(JSON.parse(fileContent))
+    console.log("STRING LITEREAL PPPAAAAAARSES")
+    console.log(JSON.parse(`${fileContent}`))
     return fileContent;
   } catch (e) {
     throw e;
