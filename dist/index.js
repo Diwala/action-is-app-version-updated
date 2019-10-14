@@ -8441,7 +8441,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFileContent", function() { return getFileContent; });
 const github = __webpack_require__(469);
 const core = __webpack_require__(470);
-const { decode } = __webpack_require__(941);
 
 let octokit;
 
@@ -8459,8 +8458,9 @@ const getFileContent = async (path) => {
     const { data: res } = await octokit.repos.getContents({
       path
     })
-    const file = decode(res.content);
-    return file;
+    const buff = new Buffer(res, 'base64');
+    const fileContent = buff.toString('ascii');
+    return fileContent;
   } catch (e) {
     throw e;
   }
@@ -10752,14 +10752,6 @@ function hasNextPage (link) {
   deprecate(`octokit.hasNextPage() – You can use octokit.paginate or async iterators instead: https://github.com/octokit/rest.js#pagination.`)
   return getPageLinks(link).next
 }
-
-
-/***/ }),
-
-/***/ 941:
-/***/ (function() {
-
-eval("require")("base-64");
 
 
 /***/ }),
