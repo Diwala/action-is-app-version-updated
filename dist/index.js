@@ -8469,7 +8469,7 @@ const getFileContent = async (path) => {
     console.log(fileContent);
     console.log("The VERSION")
     console.log(fileContent.version);
-    return fileContent;
+    return fileContent.trim();
   } catch (e) {
     throw e;
   }
