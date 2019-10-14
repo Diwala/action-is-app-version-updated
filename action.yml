@@ -9,6 +9,10 @@ inputs:
     description: 'Where to find the control file of the project, f.ex package.json on node'
     required: true
     default: 'echo "No file path value found"'
+  token: 
+    description: 'Github token'
+    required: true
+    default: 'echo "No file path value found"'
   owner: 
     description: 'Owner of repo'
     required: true

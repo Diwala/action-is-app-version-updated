@@ -8454,7 +8454,7 @@ const getFileContent = async (path) => {
       repo,
       path
     })
-    const buff = new Buffer(res, 'base64');
+    const buff = Buffer.from(res.content, 'base64');
     const fileContent = buff.toString('ascii');
     console.log(fileContent);
     return fileContent;
