@@ -8463,6 +8463,11 @@ const getFileContent = async (path) => {
     })
     const buff = Buffer.from(res.content, 'base64');
     const fileContent = buff.toString('utf8');
+    const parsed = JSON.parse(fileContent);
+    console.log(parsed);
+    console.log(parsed.version);
+    console.log(typeof parsed);
+    console.log(typeof fileContent);
     return fileContent;
   } catch (e) {
     throw e;
