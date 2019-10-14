@@ -8462,7 +8462,7 @@ const getFileContent = async (path) => {
       path
     })
     const buff = Buffer.from(res.content, 'base64');
-    const fileContent = buff.toString('ascii');
+    const fileContent = buff.toJSON();
     console.log("TYPE OFF")
     console.log(typeof fileContent)
     console.log("The content")
