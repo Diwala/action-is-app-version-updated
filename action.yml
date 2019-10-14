@@ -1,0 +1,14 @@
+name: 'Check for version change'
+description: 'This action checks for version change in a specific path'
+inputs:
+  type-check:
+    description: 'The type of project this action will check'
+    required: true
+    default: 'echo "No type check value found"'
+  file-path: 
+    description: 'Where to find the control file of the project, f.ex package.json on node'
+    required: true
+    default: 'echo "No file path value found"'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
