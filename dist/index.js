@@ -8473,7 +8473,8 @@ const getFileContent = async (path) => {
     const contentString = JSON.stringify(trimmedContent);
     console.log("CONTENT STRING")
     console.log(contentString); 
-    console.log(JSON.parse(contentString)); 
+    const reparsedContentString = JSON.parse(contentString);
+    console.log(reparsedContentString.version)
     console.log("TRIMMED CONTENT")
     console.log(trimmedContent); 
     return trimmedContent;
