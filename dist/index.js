@@ -505,6 +505,7 @@ const checkNodeVersion = (path) => {
       const filePath = `${path}/package.json`;
       const file = getFileContent(filePath);
       const oldPkgJson = JSON.parse(file)
+      console.log(oldPkgJson.version)
       const newPgkJson = __webpack_require__(169)(filePath);
       if(oldPkgJson.version === newPgkJson.version) {
         core.setFailed('Need a new package.json version');
@@ -8457,6 +8458,7 @@ const getFileContent = async (path) => {
     const buff = Buffer.from(res.content, 'base64');
     const fileContent = buff.toString('ascii');
     console.log(fileContent);
+    console.log(fileContent.version);
     return fileContent;
   } catch (e) {
     throw e;
