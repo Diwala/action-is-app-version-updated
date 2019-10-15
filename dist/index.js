@@ -508,10 +508,12 @@ const { getFileContent } = __webpack_require__(824);
 const checkNodeVersion = async (path) => {
   try {
     const filePath = `${path}/package.json`;
-    const oldPkgJson = await getFileContent(filePath);
+    const oldPkgJsonString = await getFileContent(filePath);
+    const oldPkgJson = JSON.parse(oldPkgJsonString);
+    console.log(oldPkgJson);
     console.log(oldPkgJson.version);
     await exec.exec('ls -la');
-    const newPgkJson = __webpack_require__(169)(filePath);
+    const newPgkJson = __webpack_require__(784)(`./${filePath}`);
     console.log('NEW PACKAGS JOSN');
     console.log(newPgkJson);
     console.log(newPgkJson.version);
@@ -1659,25 +1661,6 @@ module.exports = opts => {
 	return result;
 };
 
-
-/***/ }),
-
-/***/ 169:
-/***/ (function(module) {
-
-function webpackEmptyContext(req) {
-	if (typeof req === 'number' && __webpack_require__.m[req])
-  return __webpack_require__(req);
-try { return require(req) }
-catch (e) { if (e.code !== 'MODULE_NOT_FOUND') throw e }
-var e = new Error("Cannot find module '" + req + "'");
-	e.code = 'MODULE_NOT_FOUND';
-	throw e;
-}
-webpackEmptyContext.keys = function() { return []; };
-webpackEmptyContext.resolve = webpackEmptyContext;
-module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 169;
 
 /***/ }),
 
@@ -7497,6 +7480,13 @@ module.exports = require("http");
 
 /***/ }),
 
+/***/ 610:
+/***/ (function() {
+
+
+
+/***/ }),
+
 /***/ 613:
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
@@ -8740,6 +8730,40 @@ function getFirstPage (octokit, link, headers) {
   return getPage(octokit, link, 'first', headers)
 }
 
+
+/***/ }),
+
+/***/ 784:
+/***/ (function(module, __unusedexports, __webpack_require__) {
+
+var map = {
+	"./android": 610,
+	"./android.js": 610,
+	"./github": 824,
+	"./github.js": 824,
+	"./node": 95,
+	"./node.js": 95
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!Object.prototype.hasOwnProperty.call(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 784;
 
 /***/ }),
 
