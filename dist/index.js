@@ -512,7 +512,9 @@ const checkNodeVersion = async (path) => {
     const oldPkgJson = JSON.parse(oldPkgJsonString);
     console.log(oldPkgJson);
     console.log(oldPkgJson.version);
-    await exec.exec('ls -la');
+    await exec.exec('ls -la ./packages/mobile/');
+    await exec.exec(`cat ./${filePath}`);
+    
     const newPgkJson = __webpack_require__(784)(`./${filePath}`);
     console.log('NEW PACKAGS JOSN');
     console.log(newPgkJson);
