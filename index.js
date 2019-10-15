@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 const core = require('@actions/core');
-const { init, getFileContent } = require('./lib/github');
+const { init } = require('./lib/github');
 const { checkNodeVersion } = require('./lib/node');
+const { checkAndroidVersion } = require('./lib/android');
 
 try {
   init();
@@ -13,9 +14,7 @@ try {
     checkNodeVersion(path);
   }
   if (typeCheck === 'android') {
-    const filePath = `${path}/build.gradle`;
-    const file = getFileContent(filePath);
-    console.log(file);
+    checkAndroidVersion(path)
   }
 } catch (error) {
   core.setFailed(error.message);
