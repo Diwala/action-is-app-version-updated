@@ -502,6 +502,7 @@ __webpack_require__.r(__webpack_exports__);
 /* eslint-disable no-console */
 const core = __webpack_require__(470);
 const exec = __webpack_require__(986);
+const fs = __webpack_require__(747);
 const { getFileContent } = __webpack_require__(824);
 
 // eslint-disable-next-line import/prefer-default-export
@@ -515,7 +516,7 @@ const checkNodeVersion = async (path) => {
     await exec.exec('ls -la ./packages/mobile/');
     await exec.exec(`cat ./${filePath}`);
     
-    const newPgkJson = __webpack_require__(784)(`./${filePath}`);
+    const newPgkJson = JSON.parse(fs.readFileSync(`./${filePath}`, 'utf-8'))
     console.log('NEW PACKAGS JOSN');
     console.log(newPgkJson);
     console.log(newPgkJson.version);
@@ -7482,13 +7483,6 @@ module.exports = require("http");
 
 /***/ }),
 
-/***/ 610:
-/***/ (function() {
-
-
-
-/***/ }),
-
 /***/ 613:
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
@@ -8732,40 +8726,6 @@ function getFirstPage (octokit, link, headers) {
   return getPage(octokit, link, 'first', headers)
 }
 
-
-/***/ }),
-
-/***/ 784:
-/***/ (function(module, __unusedexports, __webpack_require__) {
-
-var map = {
-	"./android": 610,
-	"./android.js": 610,
-	"./github": 824,
-	"./github.js": 824,
-	"./node": 95,
-	"./node.js": 95
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!Object.prototype.hasOwnProperty.call(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 784;
 
 /***/ }),
 
