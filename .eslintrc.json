@@ -3,7 +3,7 @@
     "es6": true,
     "node": true
   },
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb"],
   "plugins": ["prettier"],
   "parserOptions": {
     "sourceType": "module",

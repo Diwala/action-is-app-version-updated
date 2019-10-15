@@ -14,7 +14,7 @@ try {
     checkNodeVersion(path);
   }
   if (typeCheck === 'android') {
-    checkAndroidVersion(path)
+    checkAndroidVersion(path);
   }
 } catch (error) {
   core.setFailed(error.message);
