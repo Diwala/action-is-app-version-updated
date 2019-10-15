@@ -498,16 +498,15 @@ module.exports = require("os");
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkNodeVersion", function() { return checkNodeVersion; });
 const core = __webpack_require__(470);
+const exec = __webpack_require__(952);
 const { getFileContent } = __webpack_require__(824);
 
-const checkNodeVersion = (path) => {
+const checkNodeVersion = async (path) => {
     try {
       const filePath = `${path}/package.json`;
-      const oldPkgJson = getFileContent(filePath);
-      console.log('THE OBJECT')
-      console.log(oldPkgJson)
-      console.log("JSON VERSION")
+      const oldPkgJson = await getFileContent(filePath);
       console.log(oldPkgJson.version)
+      await exec.exec('ls -la');
       const newPgkJson = __webpack_require__(169)(filePath);
       console.log("NEW PACKAGS JOSN")
       console.log(newPgkJson);
@@ -8464,12 +8463,7 @@ const getFileContent = async (path) => {
     })
     const buff = Buffer.from(res.content, 'base64');
     const fileContent = buff.toString('utf8');
-    const parsed = JSON.parse(fileContent);
-    console.log(parsed);
-    console.log(parsed.version);
-    console.log(typeof parsed);
-    console.log(typeof fileContent);
-    return parsed;
+    return fileContent;
   } catch (e) {
     throw e;
   }
@@ -10781,6 +10775,14 @@ module.exports = function(fn) {
 	try { return fn() } catch (e) {}
 
 }
+
+/***/ }),
+
+/***/ 952:
+/***/ (function() {
+
+eval("require")("@actions/exec");
+
 
 /***/ }),
 
