@@ -10161,14 +10161,22 @@ const checkAndroidVersion = async (path) => {
     const oldGradleFile = await getFileContent(filePath);
     const oldGradleFileJson = await g2js.parseText(oldGradleFile);
     const newGradleFileJson = await g2js.parseFile(`./${filePath}`);
-    console.log(oldGradleFileJson)
-    console.log(newGradleFileJson)
-    core.setFailed('Need a new package.json version');
-    // if (oldPkgJson.version === newPgkJson.version) {
-    //   core.setFailed('Need a new package.json version');
-    //   return;
-    // }
-    // console.log('Package.json check all good');
+    const oldConfig = oldGradleFileJson.android.defaultConfig
+    const newConfig = newGradleFileJson.android.defaultConfig;
+    console.log(oldConfig)
+    console.log(newConfig)
+    if (oldConfig.versionCode !== newConfig.versionCode) {
+      const message = `️️️
+⛔️️⛔️Need a new version for android ⛔️️⛔️
+Update the package.json
+Run 'fastlane version_bump_commit' from packages/mobile/android folder
+Then you should have bumped the version code
+And used the update package.json version with the new version code for mobile version
+`
+      core.setFailed(message);
+      return;
+    }
+    console.log('✅✅Android version check all good✅✅');
   } catch (e) {
     console.log('An unexpected error happened with node check');
     console.log(e);
@@ -11144,7 +11152,7 @@ const getFileContent = async path => {
   const { data: res } = await octokit.repos.getContents({
     owner,
     repo,
-    path
+    path,
   });
   const buff = Buffer.from(res.content, 'base64');
   const fileContent = buff.toString('utf8');
