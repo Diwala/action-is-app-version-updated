@@ -512,10 +512,10 @@ const checkNodeVersion = async (path) => {
     const oldPkgJson = JSON.parse(oldPkgJsonString);
     const newPgkJson = JSON.parse(fs.readFileSync(`./${filePath}`, 'utf-8'));
     if (oldPkgJson.version === newPgkJson.version) {
-      core.setFailed('Need a new package.json version');
+      core.setFailed('⛔️️⛔️Need a new package.json version⛔️️⛔️');
       return;
     }
-    console.log('Package.json check all good');
+    console.log('✅✅Package.json check all good✅✅');
   } catch (e) {
     console.log(e);
     core.setFailed('An unexpected error happened with node check. See log above');
