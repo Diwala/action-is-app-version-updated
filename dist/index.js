@@ -4777,6 +4777,33 @@ function errname(uv, code) {
 
 /***/ }),
 
+/***/ 429:
+/***/ (function(__unusedmodule, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getBranchFromRef", function() { return getBranchFromRef; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isBranchPartOfBranches", function() { return isBranchPartOfBranches; });
+// eslint-disable-next-line import/prefer-default-export
+const getBranchFromRef = (ref) => {
+  const parts = ref.split('/');
+  if (parts.length === 3) {
+    return parts[2];
+  }
+  throw new Error('Not a proper github ref to fetch branch from');
+};
+
+const isBranchPartOfBranches = (branch, branches) => {
+  const hits = branches.filter((option) => branch === option);
+  if (hits.length > 0) {
+    return true;
+  }
+  return false;
+};
+
+
+/***/ }),
+
 /***/ 430:
 /***/ (function(module, __unusedexports, __webpack_require__) {
 
@@ -10151,6 +10178,7 @@ __webpack_require__.r(__webpack_exports__);
 const core = __webpack_require__(470);
 const g2js = __webpack_require__(545);
 const { getFileContent } = __webpack_require__(824);
+const { getBranchFromRef, isBranchPartOfBranches } = __webpack_require__(429);
 
 
 // eslint-disable-next-line import/prefer-default-export
@@ -10162,11 +10190,13 @@ const checkAndroidVersion = async (path) => {
     const newGradleFileJson = await g2js.parseFile(`./${filePath}`);
     const oldConfig = oldGradleFileJson.android.defaultConfig;
     const newConfig = newGradleFileJson.android.defaultConfig;
-    console.log('BRANCH');
-    console.log(process.env.GITHUB_REF);
-    console.log('CONFIGSSS');
-    console.log(oldConfig);
-    console.log(newConfig);
+    const branch = getBranchFromRef(process.env.GITHUB_REF);
+
+    if (isBranchPartOfBranches(branch, ['master', 'dev'])) {
+      console.log('✅✅Not checking version on master and dev builds✅✅');
+      return;
+    }
+
     if (oldConfig.versionCode === newConfig.versionCode) {
       const message = `️️️
 ⛔️️⛔️Need a new version for android/app/build.gradle ⛔️️⛔️
