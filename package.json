@@ -15,7 +15,7 @@
     }
   },
   "dependencies": {
-    "@actions/core": "^1.1.3",
+    "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.1",
     "@actions/github": "^1.1.0",
     "gradle-to-js": "^2.0.0"
